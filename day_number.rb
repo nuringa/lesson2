@@ -9,14 +9,15 @@ month = gets.to_i
 puts 'Введите число:'
 current_day = gets.to_i
 
-month_days = if ((year % 4 == 0) && !(year % 100 == 0 )) || (year % 400 == 0)
-               [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-             else
-               [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-             end
+month_days = {
+  January: 31, February: 28, March: 31, April: 30, May: 31, June: 30, July: 31,
+    August: 31, September: 30, October: 31, November: 30, December: 31
+}
 
-day_of_the_year = month_days.take(month - 1).inject(current_day) do |day, month_day|
-  day + month_day
+if ((year % 4 == 0) && !(year % 100 == 0 )) || (year % 400 == 0)
+  month_days[:February] = 29
 end
+
+day_of_the_year = month_days.values.take(month - 1).push(current_day).sum
 
 puts "Сегодня #{day_of_the_year}-й день года."

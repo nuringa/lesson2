@@ -1,10 +1,10 @@
 abc = ('а'..'я').to_a.insert(6, 'ё')
-abc_numbered = abc.zip(1..33).to_h
 
 vowels = %w(а е ё и о у ы э ю я)
+vowels_numbered = {}
 
-vowels_numbered = abc_numbered.select do |letter, _|
-  letter if vowels.include?(letter)
+abc.select.with_index(1) do |letter, index|
+  vowels_numbered[letter] = index if vowels.include?(letter)
 end
 
 puts 'Пронумерованные гласные буквы'
